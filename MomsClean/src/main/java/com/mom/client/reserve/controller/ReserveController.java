@@ -45,9 +45,6 @@ public class ReserveController {
 	@Autowired
 	private ReserveService reserveService;
 
-	@Value("${upload.path}")
-	private String uploadPath;
-
 	@RequestMapping(value = "/reserveRegister", method = RequestMethod.GET)
 	public void list(String itemNo, Model model, HttpSession session) throws Exception {
 		// 뷰에 페이징 처리를 한 게시글 목록을 전달한다.
