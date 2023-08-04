@@ -16,15 +16,4 @@
 			ORDER BY i_no asc
 			]]>
 	</select>
-	<select id="getPicture" resultType="String">
-		SELECT item_img_thumb
-		FROM item
-		WHERE item_no = #{itemNo}
-	</select>
-	
-	<select id="getPicture2" resultType="String">
-		SELECT item_img
-		FROM item
-		WHERE item_no = #{itemNo}
-	</select>
 </mapper>
