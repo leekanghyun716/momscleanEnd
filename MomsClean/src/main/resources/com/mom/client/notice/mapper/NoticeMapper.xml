@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mom.client.notice.mapper.NoticeMapper">
+
+
+	<!-- 게시글 전체 건수를 조회한다. -->
+	<select id="count" resultType="int">
+ 		<![CDATA[
+ 		SELECT count(notice_no)
+ 		FROM notice
+ 		WHERE notice_no > 0
+		]]>
+
+	</select>
+	<!-- 게시글 상세 조회 -->
+	<select id="read" resultType="Notice">
+		SELECT notice_no,
+		notice_title,
+		notice_content,
+		notice_date
+		FROM notice
+		WHERE notice_no = #{noticeNo}
+
+	</select>
+
+	<!-- 페이징 요청 정보를 매개 변수로 받아 페이징 처리를 한 게시글 목록을 조회한다. -->
+	<select id="list" resultType="Notice">
+	 <![CDATA[
+	SELECT notice_no,
+		notice_title,
+		notice_content,
+		notice_date
+	FROM (select notice_no,
+				notice_title,
+				notice_content,
+				notice_date,
+				ROW_NUMBER() OVER(ORDER BY notice_no DESC,notice_date DESC) as rnum
+		 from notice) 
+	where rnum between #{sizePerPage}*#{page}-9 and #{sizePerPage}*#{page}
+			
+	
+	
+	]]>
+
+	</select>
+</mapper>

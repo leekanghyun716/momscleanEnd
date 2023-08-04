@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.mom.client.reference.mapper.ReferenceMapper">
+	<insert id="create">
+		INSERT INTO reference
+		(
+		reference_no,
+		root,
+		user_no,
+		reference_title,
+		reference_content,
+		reference_date,
+		no
+		)
+		VALUES
+		(
+		reference_seq.NEXTVAL,
+		reference_seq.NEXTVAL,
+		#{userNo},
+		#{referenceTitle},
+		#{referenceContent},
+		sysdate,
+		reference_seq2.NEXTVAL
+		)
+	</insert>
+	<!--게시글 목록 페이지 -->
+	<!-- <select id="list" resultType="Reference"> <![CDATA[ SELECT * FROM reference 
+		WHERE reference_no > 0 ORDER BY reference_no DESC, reference_date DESC ]]> 
+		</select> -->
+	<!-- 페이징 요청 정보를 매개 변수로 받아 페이징 처리를 한 게시글 목록을 조회한다. -->
+	<select id="list" resultType="Reference">
+<![CDATA[
+	SELECT reference_no,
+			user_no,
+			reference_title,
+			reference_content,
+			reference_date,
+			user_name,
+			step,
+			root,
+			no
+		FROM (
+    SELECT reference_no,
+           user_no,
+           reference_title,
+           reference_content,
+           reference_date,
+           rownum as rnum,
+           user_name,
+           step,
+           root,
+           no
+    FROM (
+        SELECT r.reference_no,
+               r.user_no,
+               r.reference_title,
+               r.reference_content,
+               r.reference_date,
+               u.user_name,
+               r.step,
+               r.root,
+               r.no
+        FROM reference r, user_tbl u
+        WHERE r.user_no = u.user_no
+        
+        ORDER BY r.root DESC,
+        				r.reference_no ASC,
+						r.step ASC
+    )
+) r
+where rnum between #{sizePerPage}*#{page}-9 and #{sizePerPage}*#{page}
+		ORDER BY r.root DESC,
+						r.reference_no ASC,
+						r.step ASC
+						]]>
+	</select>
+	<!-- 게시글 상세 조회 -->
+	<select id="read" resultType="Reference">
+		
+		SELECT reference_no,
+			user_no,
+			reference_title,
+			reference_content,
+			reference_date,
+			user_name,
+            no
+		FROM (
+    SELECT reference_no,
+           user_no,
+           reference_title,
+           reference_content,
+           reference_date,
+           no,
+           rownum as rnum,
+           user_name
+    FROM(
+        SELECT r.reference_no,
+               r.user_no,
+               r.reference_title,
+               r.reference_content,
+               r.reference_date,
+               u.user_name,
+               r.no
+        FROM reference r, user_tbl u
+     where r.reference_no = #{referenceNo} and r.user_no = u.user_no
+    ))r
+	</select>
+	<!--게시글 수정 처리 -->
+	<update id="update">
+		UPDATE reference
+		SET reference_title = #{referenceTitle},
+		reference_content = #{referenceContent}
+		WHERE reference_no = #{referenceNo}
+	</update>
+	<!-- 게시글 전체 건수를 조회한다. -->
+	<select id="count" resultType="int">
+	<![CDATA[
+	SELECT count(reference_no)
+	FROM reference
+	WHERE reference_no > 0
+	]]>
+	</select>
+	
+<select id="user" resultType="User">
+ select *
+ from user_tbl
+ where user_id = #{userId}
+
+</select>
+</mapper>

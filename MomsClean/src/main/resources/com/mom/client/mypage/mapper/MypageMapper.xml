@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mom.client.mypage.mapper.MypageMapper">
+
+
+<!-- 마이페이지 상세보기 -->
+<select id="view" resultType="com.mom.client.mypage.Mypage">
+  SELECT 
+        user_No,
+        user_Id, 
+        user_Pw,
+        user_Name,
+        user_Phone,
+        user_Email,
+        email_Auth,
+        reg_Date,
+        user_Division
+   FROM user_tbl
+  WHERE user_Id = #{userId}
+</select>
+
+
+<!-- 마이페이지 정보 수정처리 -->
+<update id="update">
+ UPDATE user_tbl
+    SET user_pw = #{userPw},
+        user_name= #{userName},
+        user_phone = #{userPhone},
+        user_email = #{userEmail}
+  WHERE user_id = #{userId}
+</update>
+
+
+
+<!-- 회원탈퇴 유지->탈퇴 변경처리 -->
+<update id="withdraw" >
+UPDATE user_tbl
+   SET user_division = '탈퇴',
+       withdraw_date = sysdate
+ WHERE user_id = #{userId}
+
+
+</update>
+
+	<!-- 예약현황 목록 페이지 -->
+	<select id="list" resultType="com.mom.client.mypage.ReserveInfo">
+	<![CDATA[
+	select reserve_no,
+	       user_name,
+	       reserve_item_name,
+	       reserve_option_name,
+	       clean_date,
+	       reserve_request
+	from (SELECT 
+	       reserve_no,
+	       user_name,
+	       reserve_item_name,
+	       reserve_option_name,
+	       clean_date,
+	       reserve_request,
+	       rownum as rnum
+	 		FROM (select reserve_no,
+	              user_name,
+	              reserve_item_name,
+	              reserve_option_name,
+	              clean_date,
+	              reserve_request
+	         		from reserve
+	         		where user_id = #{userId}))
+	 WHERE rnum between #{sizePerPage}*#{page}-9 and #{sizePerPage}*#{page}
+	]]>
+	<!--                 10 * 1 - 9 = 1 AND 10 * 1 = 10 -->
+	</select>
+	
+	<!--예약현황 상세 페이지 -->
+	 <select id="read" resultType="com.mom.client.mypage.ReserveInfo">
+	    SELECT 
+	           reserve_request,
+	           reserve_no,
+	           user_id,
+	           reserve_item_name,
+	           reserve_item_price,
+	           reserve_option_name,
+	           reserve_option_price,
+	           reserve_date,
+	           reserve_state,
+	           clean_done
+	     FROM  reserve
+	    WHERE  reserve_no = #{reserveNo}
+	 </select>
+	 
+	 <!-- 예약취소신청  -->
+	 <update id="cancelRequest">  
+        UPDATE reserve 
+           SET reserve_request = '취소요청', reserve_state = '예약대기' , cancel_date = sysdate
+         WHERE reserve_no = #{reserveNo} AND user_id = #{userId}
+         AND clean_done = 'N'
+         AND (reserve_request = '예약요청' OR reserve_request = '예약완료')
+    </update>
+	 
+	 <!-- 예약 전체 건수를 조회 -->
+	 <select id="count" resultType="int">
+	 <![CDATA[
+	   SELECT count(r_no)
+	     FROM reserve
+	    WHERE r_no > 0  and user_id = #{userId}
+	 ]]>
+	 
+	 </select>
+	 
+	
+</mapper>
+
+

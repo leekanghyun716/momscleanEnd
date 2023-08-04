@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mom.client.reserve.mapper.ReserveMapper">
+	<select id="getItem" resultType="Item">
+	<![CDATA[
+			SELECT i_no,
+			item_no,
+			item_division,
+			item_name,
+			item_price,
+			item_img_thumb,
+			item_img,
+			item_reg_date
+			FROM item
+			WHERE item_no = #{itemNo}
+			]]>
+	</select>
+	<select id="getUser" resultType="User">
+	<![CDATA[
+			SELECT 
+	        user_no,
+	        user_id, 
+	        user_pw,
+	        user_name,
+	        user_phone,
+	        user_email,
+	        email_auth,
+	        user_division
+	        FROM User_tbl
+	        WHERE user_id = #{userId}
+			]]>
+	</select>
+	<select id="getOption" resultType="Option">
+	<![CDATA[
+			SELECT i_no,
+			item_division,
+			item_name,
+			item_price,
+			item_reg_date
+			FROM item
+			WHERE item_division = '옵션' 
+			ORDER BY i_no asc
+			]]>
+	</select>
+	<insert id="reserveRegister">
+		INSERT INTO reserve
+		(
+		r_no,
+		reserve_no,
+		user_no,
+		user_name,
+		user_id,
+		item_no,
+		reserve_item_name,
+		reserve_item_price,
+		reserve_option_name,
+		reserve_option_price,
+		reserve_state,
+		reserve_addr,
+		reserve_date,
+		clean_date,
+		cancel_date,
+		reserve_request,
+		clean_done
+		)
+		VALUES
+		(
+			reserve_seq.NEXTVAL,
+			#{reserveNo},
+			#{userNo},
+			#{userName},
+			#{userId},
+			#{itemNo},
+			#{reserveItemName},
+			#{reserveItemPrice},
+			#{reserveOptionName},
+			#{reserveOptionPrice},
+			'예약대기',
+			#{reserveAddr},
+			sysdate,
+			#{cleanDate},
+			null,
+			'예약요청',
+			'N'
+		
+		)
+	</insert>
+	<select id="getOptionPrice" resultType="Option">
+	<![CDATA[
+			SELECT i_no,
+			item_division,
+			item_name,
+			item_price,
+			item_reg_date
+			FROM item
+			WHERE item_name = #{itemName}
+			]]>
+	</select>
+	<select id="getDate" resultType="String">
+	<![CDATA[
+			SELECT DISTINCT clean_date
+FROM (
+    SELECT 
+        r_no, reserve_no, user_no, user_name, user_id, item_no, reserve_item_name,
+        reserve_item_price, reserve_option_name, reserve_option_price, reserve_state,
+        reserve_addr, reserve_date, clean_date, cancel_date, reserve_request, clean_done,
+        ROW_NUMBER() OVER (PARTITION BY TRUNC(reserve_date) ORDER BY r_no) AS rn
+    FROM reserve
+) ranked
+WHERE TRUNC(clean_date) IN (
+    SELECT TRUNC(clean_date)
+    FROM reserve
+    GROUP BY TRUNC(clean_date)
+    HAVING COUNT(*) >= 3
+)
+			]]>
+	</select>
+</mapper>

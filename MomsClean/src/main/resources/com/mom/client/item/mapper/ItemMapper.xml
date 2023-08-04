@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mom.client.item.mapper.ItemMapper">
+	<select id="list" resultType="Item">
+	<![CDATA[
+			SELECT i_no,
+			item_no,
+			item_division,
+			item_name,
+			item_price,
+			item_img_thumb,
+			item_img,
+			item_reg_date
+			FROM item
+			WHERE item_division = '상품' 
+			ORDER BY i_no asc
+			]]>
+	</select>
+	<select id="getPicture" resultType="String">
+		SELECT item_img_thumb
+		FROM item
+		WHERE item_no = #{itemNo}
+	</select>
+	
+	<select id="getPicture2" resultType="String">
+		SELECT item_img
+		FROM item
+		WHERE item_no = #{itemNo}
+	</select>
+</mapper>

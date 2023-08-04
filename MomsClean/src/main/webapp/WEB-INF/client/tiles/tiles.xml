@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles
+Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ <tiles-definitions>
+ <!-- 공지사항 -->
+	<definition name="sub-main-template2"
+		template="/WEB-INF/client/tiles/layouts/sub_main_template2.jsp">
+		<put-attribute name="title" value="Main" />
+		<put-attribute name="header" value="/WEB-INF/client/tiles/components/sub_main2/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/client/tiles/components/sub_main2/menu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/client/tiles/components/sub_main2/footer.jsp" />
+	</definition>
+	<!-- 메인페이지 -->
+	<definition name="main-template"
+		template="/WEB-INF/client/tiles/layouts/main_template.jsp">
+		<put-attribute name="title" value="Main" />
+		<put-attribute name="header" value="/WEB-INF/client/tiles/components/main/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/client/tiles/components/main/menu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/client/tiles/components/main/footer.jsp" />
+	</definition>
+	
+	<!-- 공지사항 페이지에 대한 레이아웃 템플릿 구성 요소를 정의한다 -->
+	<definition name="client/notice/*" extends="sub-main-template2">
+		<put-attribute name="title" value="Notice"/>
+		<put-attribute name="content" value="/WEB-INF/views/client/notice/{1}.jsp"/>
+	
+	</definition>
+	
+	<!-- 공지사항 페이지에 대한 레이아웃 템플릿 구성 요소를 정의한다 -->
+	<definition name="client/intro/*" extends="sub-main-template2">
+		<put-attribute name="title" value="Intro"/>
+		<put-attribute name="content" value="/WEB-INF/views/client/intro/{1}.jsp"/>
+	
+	</definition>
+	
+	
+	<!-- 메인홈페이지에 대한 레이아웃 템플릿 구성 요소를 정의한다 -->
+	<definition name="client/mainpage/*" extends="main-template">
+		<put-attribute name="title" value="Mainpage"/>
+		<put-attribute name="content" value="/WEB-INF/views/client/mainpage/{1}.jsp"/>
+	
+	</definition>
+	
+	<!-- 리뷰에 대한 레이아웃 템플릿 구성 요소를 정의한다 -->
+	<definition name="client/review/*" extends="main-template">
+		<put-attribute name="title" value="Review"/>
+		<put-attribute name="content" value="/WEB-INF/views/client/review/{1}.jsp"/>
+	
+	</definition>
+	
+	
+	
+	<!-- reserve에 대한 레이아웃 템플릿 구성 요소를 정의한다 -->
+	<definition name="client/reserve/*" extends="main-template">
+		<put-attribute name="title" value="Reserve"/>
+		<put-attribute name="content" value="/WEB-INF/views/client/reserve/{1}.jsp"/>
+	
+	</definition>
+	
+	
+	<!-- user에 대한 레이아웃 템플릿 구성 요소를 정의한다 -->
+	<definition name="client/user/*" extends="main-template">
+		<put-attribute name="title" value="User"/>
+		<put-attribute name="content" value="/WEB-INF/views/client/user/{1}.jsp"/>
+	
+	</definition>
+	
+	
+		<!-- 로그인에 대한 레이아웃 템플릿 구성 요소를 정의한다 -->
+	<definition name="client/login/*" extends="main-template">
+		<put-attribute name="title" value="login"/>
+		<put-attribute name="content" value="/WEB-INF/views/client/login/{1}.jsp"/>
+	
+	</definition>
+	
+	
+	<!-- 로그인에 대한 레이아웃 템플릿 구성 요소를 정의한다 -->
+	<definition name="client/item/*" extends="main-template">
+		<put-attribute name="title" value="Item"/>
+		<put-attribute name="content" value="/WEB-INF/views/client/item/{1}.jsp"/>
+	
+	</definition>
+	<!-- 로그인에 대한 레이아웃 템플릿 구성 요소를 정의한다 -->
+	<definition name="client/*" extends="main-template">
+		<put-attribute name="title" value="MainPage"/>
+		<put-attribute name="content" value="/WEB-INF/views/client/{1}.jsp"/>
+	
+	</definition>
+	<!-- 로그인에 대한 레이아웃 템플릿 구성 요소를 정의한다 -->
+	<definition name="client/reference/*" extends="main-template">
+		<put-attribute name="title" value="Reference"/>
+		<put-attribute name="content" value="/WEB-INF/views/client/reference/{1}.jsp"/>
+	
+	</definition>
+	<!-- aside template1 -->
+<definition name="aside-template1" template="/WEB-INF/client/tiles/layouts/sub_main_template1.jsp">
+	<put-attribute name="header" value="/WEB-INF/client/tiles/components/sub_main1/header.jsp" />
+	<put-attribute name="menu" value="/WEB-INF/client/tiles/components/sub_main1/menu.jsp" />
+	<put-attribute name="aside1" value="/WEB-INF/client/tiles/components/sub_main1/aside1.jsp" />
+	<put-attribute name="footer" value="/WEB-INF/client/tiles/components/sub_main1/footer.jsp" />
+</definition>
+<definition name="client/mypages/*" extends="aside-template1">
+	<put-attribute name="title" value="Mypages" />
+	<put-attribute name="body" value="/WEB-INF/views/client/mypages/{1}.jsp" />
+</definition>
+	
+	
+</tiles-definitions>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mom.client.user.mapper.UserMapper">
+	<insert id="insertUser" parameterType="com.mom.client.user.User">
+		INSERT INTO user_tbl (
+		user_no,
+		user_id,
+		user_pw,
+		user_name,
+		user_phone,
+		user_email,
+		email_auth,
+		user_division
+
+		) VALUES (
+		user_tbl_seq.NEXTVAL,
+		#{userId},
+		#{userPw},
+		#{userName},
+		#{userPhone},
+		#{userEmail},
+		 <choose>
+        <!-- emailAuth 체크 여부에 따라 'Y' 또는 'N'으로 설정 -->
+        <when test="emailAuth"> 'Y' </when>
+        <otherwise> 'N' </otherwise>
+    </choose>,
+		'유지' <!-- #{userDivision} -->
+
+		)
+	</insert>
+
+	<!-- 로그인을 위한 회원 조회 쿼리 -->
+	<select id="getUserByIdAndPassword" 
+	parameterType="map"
+	resultType="com.mom.client.login.UserInfo">
+		SELECT user_id,
+		user_pw 
+		FROM user_tbl 
+		WHERE user_id = #{userId} 
+		AND 
+		user_pw = #{userPw}
+		 AND
+    user_division != '탈퇴'
+	</select>
+	
+	<!-- 기존 매퍼에 아래의 쿼리를 추가합니다. -->
+<resultMap id="userResultMap" type="com.mom.client.user.User">
+    <id property="userId" column="user_id" />
+    <!-- 기존 매퍼의 result map 내용 유지 -->
+</resultMap>
+
+<!-- 아이디 중복 체크를 위한 쿼리 -->
+   <!-- 아이디 중복 체크를 위한 쿼리 -->
+<select id="checkDuplicateId" parameterType="String" resultType="int">
+    SELECT COUNT(*) FROM user_tbl WHERE user_id = #{userId}
+</select>
+
+	<!-- 아이디 찾기를 위한 쿼리 -->
+<select id="findIdByNameAndEmail" resultType="java.lang.String">
+    SELECT user_id
+    FROM user_tbl
+    WHERE 
+    user_name = #{userName} 
+    AND
+	user_email = #{userEmail}
+</select>
+
+<!-- PW 찾기를 위한 쿼리 -->
+<select id="findPwByIdNameAndEmail" resultType="java.lang.String">
+    SELECT user_pw
+    FROM user_tbl
+    WHERE
+    user_id = #{userId}
+    AND
+    user_name = #{userName} 
+    AND
+	user_email = #{userEmail}
+</select>
+	
+</mapper> 
