@@ -81,7 +81,7 @@ $(document).ready(function(){
 
 <div>
 
-	<button type="submit" class="btn btn-primary col-sm-1 mt-3" id="btnList">
+	<button type="submit" class="btn btn-primary" id="btnList">
 		<spring:message code="common.list" />
 	</button>
 </div>
