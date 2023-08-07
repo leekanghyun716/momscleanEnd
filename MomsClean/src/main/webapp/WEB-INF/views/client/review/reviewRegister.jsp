@@ -88,7 +88,7 @@ $(document).ready(function(){
 	</form:form>
 
 	<div>
-		<button type="submit" class="btn btn-primary col-sm-1" id="btnRegister">
+		<button type="submit" class="btn btn-primary" id="btnRegister">
 			<spring:message code="review.save" />
 		</button>
 	</div>
