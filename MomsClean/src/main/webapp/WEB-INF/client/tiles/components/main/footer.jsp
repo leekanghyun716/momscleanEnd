@@ -24,8 +24,7 @@
 <div align="center" class="footer">
 <table>
 <tr>
-   <td> 회사로고</td>
-   <td>| 맘스클린</td>
+   <td> 맘스클린</td>
    <td>| 대표이사:왕미래</td>
    <td>| 02-000-0000</td>
    <td>| momsclean@gmail.com</td>

@@ -9,11 +9,33 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>	
+.quickmenu{
+      
+   position: fixed;
+   top: 50;
+   right: 0;
+    
+    }   
+</style>
+
+<div align="right">
+ <div style="opacity:0.7;" class="quickmenu"><img src="/img/logo/qnaboard.png"></div>
+</div>
+<script>
+$(document).ready(function(){
+  var currentPosition = parseInt($(".quickmenu").css("top"));
+  $(window).scroll(function() {
+    var position = $(window).scrollTop(); 
+    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+  });
+});
+</script>	
 <h2>
 	<spring:message code="reference.header.list" />
 </h2>
 
-<%-- <a href="referenceRegister"><spring:message code="action.new" /></a> --%>
+
 
 <table border="1">
 	<tr>
@@ -78,6 +100,7 @@
 		<spring:message code="action.new" />
 	</button>
 </div>
+
 
 <script>
 	var result = "${msg}";

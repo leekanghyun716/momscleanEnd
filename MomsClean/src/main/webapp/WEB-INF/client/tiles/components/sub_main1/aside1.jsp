@@ -6,13 +6,15 @@
 	<style>
         .aside {
         font-family: 'IBM Plex Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
             float:left;
             background-color: #F0F8FF;
-            width: 200px; /* 원하는 세로 줄의 높이로 변경하세요 */
+            width: 250px; /* 원하는 세로 줄의 높이로 변경하세요 */
             height: 500px;
             border-top: 1px solid #dee5e7;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: white;
+            color: 	#557DE1;
         }
         
     </style>
@@ -21,6 +23,8 @@
 <br>
 <br>
 <table align="center">
+
+ 
    <tr>
    <td align="center"><a href="/client/mypages/myPageInfo"><h4><spring:message code="mypage.aside.info"/></h4></a></td>
    <td></td>
@@ -30,11 +34,13 @@
    <td align="center"><a href="/client/mypages/myPageReserveList"><h4><spring:message code="mypage.aside.reserveList"/></h4></a></td>
    <td></td>
    </tr>
+   
    <tr>
    <td align="center"><a href="/client/login/logoutSuccess" id="btnLogout"><h4><spring:message code="mypage.action.logout"/></h4></a></td>
    </tr>   
 </table>
 </div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

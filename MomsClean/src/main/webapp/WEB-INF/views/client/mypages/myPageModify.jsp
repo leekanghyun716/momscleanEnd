@@ -27,7 +27,28 @@
     .modalSubmit:hover {
         background-color: #0056b3;
     }
- </style>
+    
+    .quickmenu{
+      
+      position: fixed;
+      top: 50;
+      right: 0;
+    
+    }   
+</style>
+
+<div align="right">
+ <div style="opacity:0.7;" class="quickmenu"><img src="/img/logo/mypage.png"></div>
+</div>
+<script>
+$(document).ready(function(){
+  var currentPosition = parseInt($(".quickmenu").css("top"));
+  $(window).scroll(function() {
+    var position = $(window).scrollTop(); 
+    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+  });
+});
+</script>
 
 <div align="center" >
 <br>
@@ -89,9 +110,6 @@
  	 </button>
 
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 
 <script>
 	$(document).ready(function() {

@@ -45,6 +45,10 @@ div{
 <a href="/client/notice/noticeList?page=1&perPageNum=10"><button type="submit" id="btnList"><spring:message code="action.list"/></button></a><!-- 목록 클릭시 목로페이지로 -->
 </div>
 
+<div align="right">
+ <div valign="bottom" style="opacity:0.7;"> <img src="/img/logo/notice.png"></div>
+</div>
+
 <script>
 	$(document).ready(function(){
 		var formObj = $("#notice");

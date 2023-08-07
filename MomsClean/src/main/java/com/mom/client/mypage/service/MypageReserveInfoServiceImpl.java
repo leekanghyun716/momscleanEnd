@@ -1,7 +1,5 @@
 package com.mom.client.mypage.service;
 
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +16,6 @@ import com.mom.client.mypage.mapper.MypageMapper;
 	@Autowired
 	MypageMapper mapper;
 	
-	private Map<String, ReserveInfo> reservationMap = new HashMap<>();
 	
 	//예약현황 리스트
 	 @Override

@@ -145,7 +145,28 @@
 hr{
 border:1px solid black;
 }
+
+.quickmenu{
+      
+      position: fixed;
+      top: 50;
+      right: 0;
+    
+    }   
 </style>
+
+<div align="right">
+ <div style="opacity:0.7;" class="quickmenu"><img src="/img/logo/items&reservations.png"></div>
+</div>
+<script>
+$(document).ready(function(){
+  var currentPosition = parseInt($(".quickmenu").css("top"));
+  $(window).scroll(function() {
+    var position = $(window).scrollTop(); 
+    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+  });
+});
+</script>
 
 <div class="itemList">
 <h2><b>상품정보</b></h2>
@@ -198,6 +219,9 @@ border:1px solid black;
 							src="/img/option/option.png"></div>
 	
 </div>
+
+
+
 <script type="text/javascript">
 	var action = '';
 	var type = '';

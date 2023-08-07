@@ -17,8 +17,6 @@ import com.mom.client.mypage.PageRequest1;
 import com.mom.client.mypage.Pagination1;
 import com.mom.client.mypage.service.MypageInfoService;
 import com.mom.client.mypage.service.MypageReserveInfoService;
-import com.mom.client.review.PageRequest;
-import com.mom.client.review.Pagination;
 
 import lombok.extern.java.Log;
 
@@ -32,6 +30,7 @@ public class MypageController {
 	
 	@Autowired
 	private MypageReserveInfoService reserveservice;
+	
 	
 
 
@@ -99,12 +98,15 @@ public class MypageController {
         HttpSession Session = request.getSession();
         
         UserInfo userInfo = (UserInfo) Session.getAttribute("user");
-    
+        
+        
         if(userInfo != null) {
-        	
+        Session.invalidate();	
     	mypage.setUserId(userInfo.getUserId());
     	 infoservice.withdraw(userInfo.getUserId());
-    	 
+ 
+    	
+    	
     	    return "redirect:/client/page";
         }else {
         	return "redirect:/client/page";
@@ -163,6 +165,8 @@ public class MypageController {
          return null;
 
 	}
+	
+
 
 	}
 

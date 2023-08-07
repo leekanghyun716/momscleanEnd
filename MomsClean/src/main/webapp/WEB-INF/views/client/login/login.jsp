@@ -90,7 +90,7 @@
                         window.location = "/client/page";
                     },
                     error: function () {
-                        alert('로그인 실패. 아이디와 비밀번호를 확인해주세요.');
+                        alert('회원탈퇴를 하셨거나, 아이디와 비밀번호가 일치하지 않습니다. 다시 시도해주세요.');
                         window.location.reload();
                         // 로그인 실패 시 페이지를 새로고침하여 다시 로그인 페이지로 이동
                     }

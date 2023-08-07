@@ -7,6 +7,30 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<style>
+.quickmenu{
+      
+   position: fixed;
+   top: 50;
+   right: 0;
+    
+    }   
+</style>
+
+<div align="right">
+ <div style="opacity:0.7;" class="quickmenu"><img src="/img/logo/qnaboard.png"></div>
+</div>
+<script>
+$(document).ready(function(){
+  var currentPosition = parseInt($(".quickmenu").css("top"));
+  $(window).scroll(function() {
+    var position = $(window).scrollTop(); 
+    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+  });
+});
+</script>
+
+
 <h2>회원 문의게시판 수정하기</h2>
 <form:form id="referForm" modelAttribute="reference" action="referenceModify">
 	<form:hidden path="referenceNo" />
@@ -30,6 +54,10 @@
 	</table>
 </form:form>
 <div>
+
+<div align="right">
+ <div valign="bottom" style="opacity:0.7;"> <img src="/img/logo/qnaboard.png"></div>
+</div>
 
 	<button type="submit" id="btnModify">수정하기</button>
 	<button type="submit" id="btnList">목록</button>

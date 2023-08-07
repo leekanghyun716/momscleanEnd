@@ -24,6 +24,7 @@
 <br>
 <br>
 <table align="center">
+  
    <tr>
    <td align="center"><a href="/client/mypages/myPageInfo"><h4><spring:message code="mypage.aside.info"/></h4></a></td>
    <td></td>

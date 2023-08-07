@@ -83,6 +83,7 @@ UPDATE user_tbl
 	           reserve_option_name,
 	           reserve_option_price,
 	           reserve_date,
+	           reserve_addr,
 	           reserve_state,
 	           clean_done
 	     FROM  reserve
@@ -107,6 +108,7 @@ UPDATE user_tbl
 	 ]]>
 	 
 	 </select>
+
 	 
 	
 </mapper>

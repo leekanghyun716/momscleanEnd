@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.mom.client.mypage.Mypage;
-import com.mom.client.mypage.PageRequest1;
+
 import com.mom.client.mypage.ReserveInfo;
 
 @Mapper
@@ -31,11 +31,10 @@ public interface MypageMapper {
 	
 	//예약취소요청
 	public void cancelRequest(@Param("reserveNo")String reserveNo, @Param("userId") String userId) throws Exception;
-	
-	
 		
 	//예약 전체 건수를 반환
 	public int count(String userId) throws Exception;
+	
 	
  
 }

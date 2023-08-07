@@ -29,6 +29,29 @@
         background-color: #0056b3;
     }
     
+    .quickmenu{
+      
+      position: fixed;
+      top: 50;
+      right: 0;
+    
+    }   
+</style>
+
+<div align="right">
+ <div style="opacity:0.7;" class="quickmenu"><img src="/img/logo/mypage.png"></div>
+</div>
+
+<script>
+$(document).ready(function(){
+  var currentPosition = parseInt($(".quickmenu").css("top"));
+  $(window).scroll(function() {
+    var position = $(window).scrollTop(); 
+    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+  });
+});
+</script>
+    
  
     
  </style>
@@ -42,29 +65,29 @@
 		<table>
 			<tr>
 				<td align="center" ><spring:message code="mypage.reserveNo" /></td>
-				<td><form:input path="reserveNo" readonly="true" /></td>
+				<td><form:input path="reserveNo" size="45" readonly="true" /></td>
 			</tr>
 			<td></td>
 			<tr>
 				<td align="center" ><spring:message code="mypage.userId" /></td>
-				<td><form:input path="userId" readonly="true" /></td>
+				<td><form:input path="userId" size="45" readonly="true" /></td>
 			</tr>
 			<tr>
 				<td rowspan="2" align="center"  ><spring:message
 						code="mypage.itemInfo" /></td>
-				<td><form:input path="reserveItemName" readonly="true" /></td>
+				<td><form:input path="reserveItemName" size="45" readonly="true" /></td>
 			</tr>
 			<tr>
-				<td><form:input path="reserveItemPrice" readonly="true" />원
+				<td><form:input path="reserveItemPrice" size="45" readonly="true" />원
 			</tr>
 			</td>
 			<tr>
 				<td rowspan="2" align="center"  ><spring:message
 						code="mypage.itemOption" /></td>
-				<td><form:input path="reserveOptionName" readonly="true" /></td>
+				<td><form:input path="reserveOptionName" size="45" readonly="true" /></td>
 			</tr>
 			<tr>
-				<td><form:input path="reserveOptionPrice" readonly="true" />원</td>
+				<td><form:input path="reserveOptionPrice" size="45" readonly="true" />원</td>
 			</tr>
 			<tr>
 				<td align="center"  ><spring:message code="mypage.reserveDate" /></td>
@@ -73,12 +96,16 @@
 
 			</tr>
 			<tr>
+				<td align="center" ><spring:message code="mypage.reserveAddr" /></td>
+				<td><form:input path="reserveAddr" size="45" readonly="true" /></td>
+			</tr>
+			<tr>
 				<td align="center" ><spring:message code="mypage.reserveState" /></td>
-				<td><form:input path="reserveState" readonly="true" /></td>
+				<td><form:input path="reserveState"  size="45" readonly="true" /></td>
 			</tr>
 			<tr>
 				<td align="center"><spring:message code="mypage.cleanDone" /></td>
-				<td><form:input path="cleanDone" id="cleandone" readonly="true" /></td>
+				<td><form:input path="cleanDone"  size="45" id="cleandone" readonly="true" /></td>
 
 			</tr>
 		</table>
@@ -97,7 +124,7 @@
 			<spring:message code="mypage.action.reserveList" />
 		</button>
 	</div>
-</div>
+	
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
@@ -112,6 +139,7 @@
 		}else {
 			$("#btnCancel").prop("disabled",  false);
 		}
+	
 	});
 	$("#btnAddReserve").on("click", function(){
 		self.location = "../item/itemInfo";
