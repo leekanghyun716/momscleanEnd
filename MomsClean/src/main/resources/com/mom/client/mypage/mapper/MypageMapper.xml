@@ -66,8 +66,9 @@ UPDATE user_tbl
 	              clean_date,
 	              reserve_request
 	         		from reserve
-	         		where user_id = #{userId}))
+	         		where user_id = #{userId} ))
 	 WHERE rnum between #{sizePerPage}*#{page}-9 and #{sizePerPage}*#{page}
+	 ORDER BY clean_date desc
 	]]>
 	<!--                 10 * 1 - 9 = 1 AND 10 * 1 = 10 -->
 	</select>
