@@ -41,7 +41,7 @@
     }
 
     /* Image style */
-    img {
+    #img {
         display: block;
         margin: 0 auto;
         width: 400px;
@@ -198,28 +198,7 @@
         text-align: center;
     }
     
-    .quickmenu{
-      
-   position: fixed;
-   top: 50;
-   right: 0;
-    
-    }   
 </style>
-
-<div align="right">
- <div style="opacity:0.7;" class="quickmenu"><img src="/img/logo/items&reservations.png"></div>
-</div>
-<script>
-$(document).ready(function(){
-  var currentPosition = parseInt($(".quickmenu").css("top"));
-  $(window).scroll(function() {
-    var position = $(window).scrollTop(); 
-    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
-  });
-});
-</script>
-
 <div class="reserveDiv">
 	<h2>예약</h2>
 	<hr>
@@ -235,7 +214,7 @@ $(document).ready(function(){
 
 		<table border="0" id="table">
 			<tr id="tr">
-				<td rowspan="3" id="td"><img src="/img${item.itemImgThumb}"></td>
+				<td rowspan="3" id="td"><img src="/img${item.itemImgThumb}" id="img"></td>
 			</tr>
 			<tr id="tr">
 				<td width="400px" colspan="5" id="td"><font class="itemFont">당신만을
