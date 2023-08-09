@@ -68,9 +68,7 @@ $(document).ready(function(){
     </td>
 
     <td align="left">
-      <a href="/client/reference/referenceDetail
-             ${pagination.makeQuery(pagination.pageRequest.page)}
-             &referenceNo=${reference.referenceNo}">
+      <a href="/client/reference/referenceDetail${pagination.makeQuery(pagination.pageRequest.page)}&referenceNo=${reference.referenceNo}">
         ${reference.referenceTitle}
       </a>
     </td>
